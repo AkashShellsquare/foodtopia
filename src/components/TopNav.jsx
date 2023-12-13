@@ -11,8 +11,6 @@ import { MdHelp, MdOutlineFavorite } from "react-icons/md";
 import { useTheme } from "./ThemeContext";
 import { Dialog, IconButton } from "@mui/material";
 import CartPage from "./CartPage";
-import { actionTypes, operationContext, operationReducer } from "./operationReducer";
-console.log(actionTypes,operationReducer);
 
 
 
@@ -24,9 +22,7 @@ const TopNav = () => {
 
   const [cartOpen, setCartOpen] = useState(false);
 
-  const {
-    actionTypes ,operationReducer
-  } = useContext(operationContext);
+
 
 
   // console.log(actionTypes,'actionTypes');

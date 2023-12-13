@@ -36,10 +36,13 @@ const Meals = () => {
   }));
 
   const [foods, setFoods] = useState(mealData);
-  console.log(foods,'doodes');
   const [cart, setCart] = useState([]);
   const [count, setCount] = useState(0);
 
+  const dataProps = {
+    cart,
+    count,
+  };
 
   const addToCart = (item) => {
 
@@ -60,10 +63,6 @@ const Meals = () => {
       });
     }
 
-  };
-  const dataProps = {
-    cart,
-    count,
   };
 
   const [cartOpen, setCartOpen] = useState();
@@ -173,9 +172,13 @@ const Meals = () => {
           </div>
         ))}
       </div>
-      <Dialog open={cartOpen} onClose={handleCartClose} maxWidth="md">
-        <CartPage cart={dataProps.cart} count={dataProps.count} />
-      </Dialog>
+      { dataProps.cart && dataProps.count &&
+        <>
+          <Dialog open={cartOpen} onClose={handleCartClose} maxWidth="md">
+            <CartPage cart={dataProps.cart} count={dataProps.count} />
+          </Dialog>
+        </>
+      }
     </div>
   );
 };

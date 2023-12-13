@@ -7,7 +7,6 @@ import CartItem from "./CartItem";
 
 // eslint-disable-next-line react/prop-types
 const CartPage = ({ cart: data, count }) => {
-
   const { themeMode } = useTheme();
 
   const divStyle = {
@@ -21,27 +20,35 @@ const CartPage = ({ cart: data, count }) => {
   };
 
   const totalAmount = data.reduce((acc, item) => {
-    const itemPrice = parseFloat(item.price.replace('$', '')); 
-    return acc + (itemPrice * count[item.id]);
+    const itemPrice = parseFloat(item.price.replace("$", ""));
+    return acc + itemPrice * count[item.id];
   }, 0);
 
-
   return (
-    <Container style={{ ...divStyle, ...fontStyle }}>
-      <Typography variant="h4" gutterBottom align="center">
-        Cart Details
-      </Typography>
-      <Grid container spacing={2}>
-        { data ? data.map((item, index) => (
-          <Grid item xs={4} key={index}>
-            <CartItem data={item} count={count[item.id]} />
+    <>
+      {totalAmount > 0 &&
+        <Container className="" style={{ ...divStyle, ...fontStyle }}>
+          <Typography variant="h4" gutterBottom align="center">
+            Cart Details
+          </Typography>
+          <Grid container spacing={2}>
+            {data
+              ? data.map((item, index) => (
+                  <Grid item xs={4} key={index}>
+                    <CartItem data={item} count={count[item.id]} />
+                  </Grid>
+                ))
+              : ""}
           </Grid>
-        )) : ""}
-      </Grid>
-      <Paper style={{ ...paperStyle, ...fontStyle,...paperModeStyle }} elevation={12}>
-        <BillingInformation totalAmount={totalAmount} />
-      </Paper>
-    </Container>
+          <Paper
+            style={{ ...paperStyle, ...fontStyle, ...paperModeStyle }}
+            elevation={12}
+          >
+            <BillingInformation totalAmount={totalAmount} />
+          </Paper>
+        </Container>
+      }
+    </>
   );
 };
 

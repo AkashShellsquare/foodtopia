@@ -18,12 +18,14 @@
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
     "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "next": "^14.0.4",
     "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
+    "tw-elements": "^1.1.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
