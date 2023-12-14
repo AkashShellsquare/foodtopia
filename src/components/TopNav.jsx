@@ -11,8 +11,7 @@ import { MdHelp, MdOutlineFavorite } from "react-icons/md";
 import { useTheme } from "./ThemeContext";
 import { Dialog, IconButton } from "@mui/material";
 import CartPage from "./CartPage";
-
-
+import { Link } from 'react-router-dom'
 
 const TopNav = () => {
   const [sideNav, setSideNav] = useState(false);
@@ -21,6 +20,8 @@ const TopNav = () => {
   const { isDarkTheme, toggleTheme ,themeMode} = useTheme();
 
   const [cartOpen, setCartOpen] = useState(false);
+  const [profile , setProfile] = useState(false);
+
 
 
 
@@ -67,6 +68,11 @@ const TopNav = () => {
   const freeBackgroundClass = isFreeDeliveryOrange ? "bg-orange-700" : "bg-gray-200";
   const deliveryBackgroundClass = isFreeDeliveryOrange ? "bg-gray-200" : "bg-orange-700";
 
+
+  // const handleSignIn = ()=>{
+  //   setProfile((prev)=>!prev)
+  // }
+
   return (
     <div className="max-w-[1520] mx-auto  flex justify-between iems-center p-4" style={divStyle}>
       <div className="flex items-center">
@@ -109,6 +115,7 @@ const TopNav = () => {
       <Dialog open={cartOpen} onClose={handleCartClose} maxWidth="md">
       <CartPage  />
       </Dialog>
+
       {sideNav ? ( 
         <div className="bg-black/60 fixed w-full h-screen z-10 top-0 left-0" onClick={()=>setSideNav(!sideNav)}></div>
       ) : (
@@ -131,12 +138,14 @@ const TopNav = () => {
         </h2>
         <nav style={{ ...divStyle, ...fontStyle }}>
           <ul style={{ ...divStyle, ...fontStyle }} className="flex flex-col p-4 text-gray-900">
-            <li className="text-xl py-4 flex">
+            <li  className="text-xl py-4 flex">
               <BsPerson
                 className="mr-4 text-white bg-black rounded-full"
                 size={25}
               />
-              Profile
+              
+            <Link to="/signup">Profile</Link>
+
             </li>
             <li className="text-xl py-4 flex">
               <TbTruckReturn
