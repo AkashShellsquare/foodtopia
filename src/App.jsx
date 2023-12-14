@@ -28,7 +28,7 @@ function App() {
           <Footer />
           <Routes>
           {/* <Route path="/signup" element={<Signup />} /> */}
-            <Route path="/signup" element={<Signup />} />
+            {/* <Route path="/signup" element={<Signup />} /> */}
           </Routes>
         </div>
       </ThemeProvider>
