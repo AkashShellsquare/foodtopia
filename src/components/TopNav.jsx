@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React,{useContext} from "react";
 import { useState } from "react";
-import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose ,AiOutlineLogin} from "react-icons/ai";
 import { MdDarkMode} from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { TbTruckReturn } from "react-icons/tb";
@@ -9,10 +9,11 @@ import { FaGoogleWallet } from "react-icons/fa";
 import { PiSunLight } from "react-icons/pi";
 import { MdHelp, MdOutlineFavorite } from "react-icons/md";
 import { useTheme } from "./ThemeContext";
-import { Dialog, IconButton } from "@mui/material";
+import { Dialog, IconButton ,Button } from "@mui/material";
 import CartPage from "./CartPage";
 import { Link } from 'react-router-dom'
-
+import ModalDialog from "./ModalDialog";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 const TopNav = () => {
   const [sideNav, setSideNav] = useState(false);
   const [search , setSearch] = useState(false)
@@ -69,59 +70,100 @@ const TopNav = () => {
   const deliveryBackgroundClass = isFreeDeliveryOrange ? "bg-gray-200" : "bg-orange-700";
 
 
-  // const handleSignIn = ()=>{
-  //   setProfile((prev)=>!prev)
-  // }
+  const [open, setOpen] = useState(false);
+
+  // function to handle modal open
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  // function to handle modal close
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <div className="max-w-[1520] mx-auto  flex justify-between iems-center p-4" style={divStyle}>
+    <div
+      className="max-w-[1520] mx-auto  flex justify-between iems-center p-4"
+      style={divStyle}
+    >
       <div className="flex items-center">
         <div onClick={() => setSideNav(!sideNav)} className="cursor-pointer">
           <AiOutlineMenu size={25} style={{ ...divStyle, ...fontStyle }} />
         </div>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2 ">
-          <span className="font-bold" style={fontStyle}>FoodTopia</span>
+          <span className="font-bold" style={fontStyle}>
+            FoodTopia
+          </span>
         </h1>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]">
-        <p style={{  ...fontStyle }} onClick={toggleFreeDeliveryColor} className={freeBackgroundClass + " select-none text-white rounded-full p-2 text-bold"}>
-          Free
-        </p>
-        <p style={{  ...fontStyle }} onClick={toggleFreeDeliveryColor} className={deliveryBackgroundClass + " text-white rounded-full select-none p-2 text-bold cursor-pointer"}>
-          Delivery
-        </p>
+          <p
+            style={{ ...fontStyle }}
+            onClick={toggleFreeDeliveryColor}
+            className={
+              freeBackgroundClass +
+              " select-none text-white rounded-full p-2 text-bold"
+            }
+          >
+            Free
+          </p>
+          <p
+            style={{ ...fontStyle }}
+            onClick={toggleFreeDeliveryColor}
+            className={
+              deliveryBackgroundClass +
+              " text-white rounded-full select-none p-2 text-bold cursor-pointer"
+            }
+          >
+            Delivery
+          </p>
+        </div>
       </div>
-      </div>
-      <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]" style={{...inputColor }} >
+      <div
+        className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]"
+        style={{ ...inputColor }}
+      >
         <AiOutlineSearch size={25} />
-        <input  onClick={() => setSearch(!search)} 
+        <input
+          onClick={() => setSearch(!search)}
           className="bg-transparent p-2 w-full focus:outline-none"
           type="text"
           placeholder="Search meals...."
         ></input>
       </div>
       {search ? (
-        <div className="bg-black/60 fixed w-full h-screen z-10 top-0 left-0" onClick={()=>setSearch(!search)}></div>
+        <div
+          className="bg-black/60 fixed w-full h-screen z-10 top-0 left-0"
+          onClick={() => setSearch(!search)}
+        ></div>
       ) : (
         ""
       )}
-      <IconButton onClick={toggleTheme}  className="text-black hidden md:flex items-center  rounded-full">
+      <IconButton
+        onClick={toggleTheme}
+        className="text-black hidden md:flex items-center  rounded-full"
+      >
         {isDarkTheme ? (
-          <PiSunLight  style={{ ...divStyle, ...fontStyle }} size={25}  />
+          <PiSunLight style={{ ...divStyle, ...fontStyle }} size={25} />
         ) : (
           <MdDarkMode style={{ ...divStyle, ...fontStyle }} size={25} />
         )}{" "}
-      </IconButton >
+      </IconButton>
 
       <Dialog open={cartOpen} onClose={handleCartClose} maxWidth="md">
-      <CartPage  />
+        <CartPage />
       </Dialog>
 
-      {sideNav ? ( 
-        <div className="bg-black/60 fixed w-full h-screen z-10 top-0 left-0" onClick={()=>setSideNav(!sideNav)}></div>
+      {sideNav ? (
+        <div
+          className="bg-black/60 fixed w-full h-screen z-10 top-0 left-0"
+          onClick={() => setSideNav(!sideNav)}
+        ></div>
       ) : (
         ""
       )}
-      <div style={{ ...divStyle, ...fontStyle }}
+      <div
+        style={{ ...divStyle, ...fontStyle }}
         className={
           sideNav
             ? "fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300"
@@ -137,15 +179,20 @@ const TopNav = () => {
           KFC <span className="text-red-700 font-bold"> 🏳️‍⚧️Eng</span>
         </h2>
         <nav style={{ ...divStyle, ...fontStyle }}>
-          <ul style={{ ...divStyle, ...fontStyle }} className="flex flex-col p-4 text-gray-900">
-            <li  className="text-xl py-4 flex">
+          <ul
+            style={{ ...divStyle, ...fontStyle }}
+            className="flex flex-col p-4 text-gray-900"
+          >
+            <li
+              className="text-xl py-4 flex"
+              onClick={() => setProfile(!profile)}
+            >
               <BsPerson
                 className="mr-4 text-white bg-black rounded-full"
                 size={25}
               />
-              
-            <Link to="/signup">Profile</Link>
 
+              <Link to="/signup">Profile</Link>
             </li>
             <li className="text-xl py-4 flex">
               <TbTruckReturn
@@ -178,6 +225,14 @@ const TopNav = () => {
           </ul>
         </nav>
       </div>
+      {/* {profile && (
+        <> */}
+          <Button variant="outlined" color="primary" onClick={handleOpen}>
+            <AccountCircleSharpIcon size={25}/> Signup
+          </Button>
+          <ModalDialog open={open} handleClose={handleClose} />
+        {/* </>
+      )} */}
     </div>
   );
 };
