@@ -57,6 +57,7 @@ const NewsLetter = () => {
   const sendEmail = async () => {
     if (data.email && data.subject && data.message) {
       showSnackBar(true);
+      clearInput(); // clear it while integraing server
   
       let dataSend = {
         email: data.email,

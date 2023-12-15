@@ -95,7 +95,6 @@ const userData = (e) => {
 
 
   const totalAmount = amount ? Object.values(amount) : null;
-  console.log(Object.values(amount)[0],'totalAmount');
 
   return (
     <div>
